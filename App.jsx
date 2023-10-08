@@ -1,24 +1,11 @@
-import {useState} from 'react';
-import {AppContext} from './src/context/AppContext';
-import Router from './src/router';
+import {Provider} from './src/context/Provider';
+import {Router} from './src/router/Router';
 
 const App = () => {
-  const [hasUser, setHasUser] = useState(true);
-  const [creatorMode, setCreatorMode] = useState(false);
-  const [polygonCoordinates, setPolygonCoordinates] = useState([]);
-
   return (
-    <AppContext.Provider
-      value={{
-        hasUser,
-        setHasUser,
-        creatorMode,
-        setCreatorMode,
-        polygonCoordinates,
-        setPolygonCoordinates,
-      }}>
+    <Provider>
       <Router />
-    </AppContext.Provider>
+    </Provider>
   );
 };
 

@@ -7,10 +7,10 @@ import AppMapView from '../screens/AppMapView';
 
 const Stack = createNativeStackNavigator();
 
-const Router = () => {
+export const Router = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={AppMapView}
@@ -25,5 +25,3 @@ const Router = () => {
     </NavigationContainer>
   );
 };
-
-export default Router;

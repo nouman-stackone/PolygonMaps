@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import MapView, {Polygon} from 'react-native-maps';
 import {
   View,
@@ -16,7 +16,7 @@ import uuid from 'react-native-uuid';
 
 enableLatestRenderer();
 
-const AppMapView = ({route, navigation}) => {
+const AppMapView = ({navigation}) => {
   const {
     creatorMode,
     setCreatorMode,
