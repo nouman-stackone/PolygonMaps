@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useLayoutEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {AppContext} from '../context/AppContext';
@@ -6,6 +6,12 @@ import {AppContext} from '../context/AppContext';
 const MapsList = ({navigation}) => {
   const {setCreatorMode, polygonCoordinates, setPolygonCoordinates} =
     useContext(AppContext);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'My Areas',
+    });
+  }, []);
 
   const handleCreate = () => {
     setCreatorMode(true);

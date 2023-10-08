@@ -127,6 +127,7 @@ const AppMapView = ({route, navigation}) => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <TextInput
+              autoFocus
               style={styles.input}
               value={inputValue}
               onChangeText={handleInputChange}

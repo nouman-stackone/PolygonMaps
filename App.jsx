@@ -1,12 +1,6 @@
 import {useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import AppMapView from './src/screens/AppMapView';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import MapsList from './src/screens/MapsList';
 import {AppContext} from './src/context/AppContext';
-import HighlightedPolygon from './src/screens/HightlightedPolygon';
-
-const Stack = createNativeStackNavigator();
+import Router from './src/router';
 
 const App = () => {
   const [hasUser, setHasUser] = useState(true);
@@ -23,20 +17,7 @@ const App = () => {
         polygonCoordinates,
         setPolygonCoordinates,
       }}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={AppMapView}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen name="MapList" component={MapsList} />
-          <Stack.Screen
-            name="HighlightedPolygon"
-            component={HighlightedPolygon}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Router />
     </AppContext.Provider>
   );
 };
