@@ -1,9 +1,18 @@
 import React, {useContext, useState} from 'react';
 import MapView, {Polygon} from 'react-native-maps';
-import {View, Button, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {
+  View,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  Modal,
+  TextInput,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {enableLatestRenderer} from 'react-native-maps';
 import {AppContext} from '../context/AppContext';
+import uuid from 'react-native-uuid';
 
 enableLatestRenderer();
 
@@ -16,6 +25,8 @@ const AppMapView = ({navigation}) => {
   } = useContext(AppContext);
 
   const [coordinates, setCoordinates] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [inputValue, setInputValue] = useState('');
 
   const initialRegion = {
     latitude: 33.6844,
@@ -54,14 +65,21 @@ const AppMapView = ({navigation}) => {
     }
   };
 
-  const handleCreate = () => {
-    if (coordinates.length > 2) {
-      const newPolygonCoordinates = [...polygonCoordinates, coordinates];
+  const createNewPolygon = () => {
+    const newPolygonCoordinates = [
+      ...polygonCoordinates,
+      {title: inputValue, id: uuid.v4(), coordinates},
+    ];
 
-      setPolygonCoordinates(newPolygonCoordinates);
-      setCoordinates([]);
-      navigation.navigate('MapList');
-    }
+    setPolygonCoordinates(newPolygonCoordinates);
+    setIsModalVisible(false);
+    setCoordinates([]);
+    setInputValue('');
+    navigation.navigate('MapList');
+  };
+
+  const handleInputChange = text => {
+    setInputValue(text);
   };
 
   return (
@@ -81,7 +99,12 @@ const AppMapView = ({navigation}) => {
 
       {creatorMode && (
         <View style={styles.btnGroup}>
-          <Button title="Create" onPress={handleCreate} />
+          <Button
+            title="Create"
+            onPress={() => {
+              if (coordinates.length > 2) setIsModalVisible(true);
+            }}
+          />
           <Button title="Clear" onPress={() => setCoordinates([])} />
         </View>
       )}
@@ -90,6 +113,29 @@ const AppMapView = ({navigation}) => {
           <Icon name="list-ul" size={30} color="black" />
         </TouchableOpacity>
       </View>
+
+      {/* Modal to take map title input */}
+      <Modal
+        animationType="slide"
+        backdropColor="black"
+        backdropOpacity={0.6}
+        visible={isModalVisible}
+        onRequestClose={() => setIsModalVisible(false)}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <TextInput
+              style={styles.input}
+              value={inputValue}
+              onChangeText={handleInputChange}
+              placeholder="Enter map name..."
+            />
+            <View style={styles.modalBtnGroup}>
+              <Button title="Save" onPress={createNewPolygon} />
+              <Button title="Cancel" onPress={() => setIsModalVisible(false)} />
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -111,5 +157,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
     gap: 8,
+  },
+  // Modal styles
+  modalContainer: {
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    width: '80%',
+    alignItems: 'center',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    marginBottom: 20,
+    width: '100%',
+    borderRadius: 5,
+  },
+  modalBtnGroup: {
+    flexDirection: 'row',
+    gap: 6,
   },
 });

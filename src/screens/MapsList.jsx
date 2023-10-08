@@ -12,11 +12,11 @@ const MapsList = ({navigation}) => {
 
   return (
     <View>
-      <Text>
-        {polygonCoordinates.map((item, id) => (
-          <Text key={id}>{JSON.stringify(item)}</Text>
-        ))}
-      </Text>
+      {polygonCoordinates.map(item => (
+        <Text onPress={() => console.log(item)} key={item?.id}>
+          {item?.title}
+        </Text>
+      ))}
       <Button title="Create" onPress={handleCreate} />
     </View>
   );
