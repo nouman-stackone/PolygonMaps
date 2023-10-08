@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import {
+  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -14,8 +15,8 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput placeholder="Name..." />
-      <TextInput placeholder="Password..." />
+      <TextInput style={styles.inp} placeholder="Enter Name..." />
+      <TextInput style={styles.inp} placeholder="Enter Password..." />
       <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
         <Text style={styles.btnTxt}>Login</Text>
       </TouchableOpacity>
@@ -27,9 +28,19 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
+    marginTop: 24,
+  },
+  logo: {
+    width: '100%',
+  },
+  inp: {
+    borderRadius: 12,
+    backgroundColor: 'lightgray',
+    marginTop: 12,
+    paddingLeft: 16,
   },
   loginBtn: {
-    backgroundColor: 'gray',
+    backgroundColor: 'black',
     padding: 12,
     borderRadius: 12,
     marginTop: 12,
@@ -37,5 +48,7 @@ const styles = StyleSheet.create({
   btnTxt: {
     color: 'white',
     textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 18,
   },
 });

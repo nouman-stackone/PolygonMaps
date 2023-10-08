@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator();
 
 export const UnAuthedRoutes = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator>
       <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>
   );
