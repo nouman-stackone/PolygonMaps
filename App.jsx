@@ -4,6 +4,7 @@ import AppMapView from './src/screens/AppMapView';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MapsList from './src/screens/MapsList';
 import {AppContext} from './src/context/AppContext';
+import HighlightedPolygon from './src/screens/HightlightedPolygon';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,10 @@ const App = () => {
             options={{headerShown: false}}
           />
           <Stack.Screen name="MapList" component={MapsList} />
+          <Stack.Screen
+            name="HighlightedPolygon"
+            component={HighlightedPolygon}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </AppContext.Provider>

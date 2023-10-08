@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import MapView, {Polygon} from 'react-native-maps';
 import {
   View,
@@ -16,7 +16,7 @@ import uuid from 'react-native-uuid';
 
 enableLatestRenderer();
 
-const AppMapView = ({navigation}) => {
+const AppMapView = ({route, navigation}) => {
   const {
     creatorMode,
     setCreatorMode,
@@ -27,6 +27,14 @@ const AppMapView = ({navigation}) => {
   const [coordinates, setCoordinates] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
+
+  // useEffect(() => {
+  //   console.log('hello', route.params);
+  //   if (route?.params?.polygonCords) {
+  //     setCoordinates(route.params.polygonCords);
+  //     console.log('hello: ', route.params.polygonCords);
+  //   }
+  // }, [route.params]);
 
   const INITIAL_REGION = {
     latitude: 33.6844,

@@ -11,6 +11,13 @@ const MapsList = ({navigation}) => {
     navigation.navigate('Home');
   };
 
+  const showDetails = map => {
+    navigation.navigate('HighlightedPolygon', {
+      coordinates: map.coordinates,
+      title: map.title,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handleCreate} style={styles.btn}>
@@ -20,7 +27,7 @@ const MapsList = ({navigation}) => {
       {polygonCoordinates.map(item => (
         <View key={item.id}>
           <TouchableOpacity
-            onPress={() => console.log(item)}
+            onPress={() => showDetails(item)}
             style={styles.itemContainer}>
             <View>
               <Text style={styles.title}>{item?.title}</Text>
