@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import MapView, {Polygon} from 'react-native-maps';
+import {View, Button, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {enableLatestRenderer} from 'react-native-maps';
-
-import {View, Button} from 'react-native';
 enableLatestRenderer();
 
-const AppMapView = () => {
+const AppMapView = ({navigation}) => {
   const [polygonCoordinates, setPolygonCoordinates] = useState([]);
 
   const handleMapPress = event => {
@@ -36,9 +36,24 @@ const AppMapView = () => {
           />
         )}
       </MapView>
+
       <Button title="Clear" onPress={() => setPolygonCoordinates([])} />
+
+      <View style={styles.listIconContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('MapList')}>
+          <Icon name="list-ul" size={30} color="black" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 export default AppMapView;
+
+const styles = StyleSheet.create({
+  listIconContainer: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+  },
+});
