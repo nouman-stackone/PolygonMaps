@@ -1,5 +1,5 @@
 import {Provider} from './src/context/Provider';
-import {Router} from './src/router/Router';
+import {Router} from './src/router';
 
 const App = () => {
   return (

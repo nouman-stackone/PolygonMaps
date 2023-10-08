@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {AppContext} from './AppContext';
 
 export const Provider = ({children}) => {
-  const [hasUser, setHasUser] = useState(true);
+  const [hasUser, setHasUser] = useState(false);
   const [creatorMode, setCreatorMode] = useState(false);
   const [polygonCoordinates, setPolygonCoordinates] = useState([]);
 

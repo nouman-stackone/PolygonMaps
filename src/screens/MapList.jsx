@@ -3,9 +3,13 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {AppContext} from '../context/AppContext';
 
-const MapsList = ({navigation}) => {
-  const {setCreatorMode, polygonCoordinates, setPolygonCoordinates} =
-    useContext(AppContext);
+const MapList = ({navigation}) => {
+  const {
+    setCreatorMode,
+    polygonCoordinates,
+    setPolygonCoordinates,
+    setHasUser,
+  } = useContext(AppContext);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -32,6 +36,13 @@ const MapsList = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      {/* Logout button */}
+      <TouchableOpacity
+        style={styles.logoutBtn}
+        onPress={() => setHasUser(false)}>
+        <Text style={styles.logoutBtnTxt}>Logout</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity onPress={handleCreate} style={styles.btn}>
         <Text style={styles.btnTxt}>Create</Text>
       </TouchableOpacity>
@@ -56,10 +67,17 @@ const MapsList = ({navigation}) => {
   );
 };
 
-export default MapsList;
+export default MapList;
 const styles = StyleSheet.create({
   container: {
     margin: 20,
+  },
+  logoutBtn: {
+    marginBottom: 12,
+  },
+  logoutBtnTxt: {
+    textAlign: 'right',
+    color: 'red',
   },
   btn: {
     padding: 14,

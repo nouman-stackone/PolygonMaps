@@ -16,7 +16,7 @@ import uuid from 'react-native-uuid';
 
 enableLatestRenderer();
 
-const AppMapView = ({navigation}) => {
+const Map = ({navigation}) => {
   const {
     creatorMode,
     setCreatorMode,
@@ -144,7 +144,7 @@ const AppMapView = ({navigation}) => {
   );
 };
 
-export default AppMapView;
+export default Map;
 
 const styles = StyleSheet.create({
   listIconContainer: {
