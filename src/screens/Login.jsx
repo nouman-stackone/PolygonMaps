@@ -1,6 +1,5 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {
-  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -11,12 +10,31 @@ import {AppContext} from '../context/AppContext';
 
 const Login = () => {
   const {setHasUser} = useContext(AppContext);
-  const handleLogin = () => setHasUser(true);
+
+  const [name, setName] = useState('');
+  const [passoword, setPassoword] = useState('');
+
+  const handleLogin = () => {
+    if (!name || !passoword) alert('Fields cannot be empty!');
+    else setHasUser(true);
+  };
 
   return (
     <View style={styles.container}>
-      <TextInput style={styles.inp} placeholder="Enter Name..." />
-      <TextInput style={styles.inp} placeholder="Enter Password..." />
+      <TextInput
+        style={styles.inp}
+        value={name}
+        onChangeText={setName}
+        placeholder="Enter Name..."
+      />
+
+      <TextInput
+        style={styles.inp}
+        value={passoword}
+        onChangeText={setPassoword}
+        placeholder="Enter Password..."
+      />
+
       <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
         <Text style={styles.btnTxt}>Login</Text>
       </TouchableOpacity>

@@ -2,6 +2,7 @@ import React, {useContext, useLayoutEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {AppContext} from '../context/AppContext';
+import {calculatePolygonArea} from '../utils/calculateArea';
 
 const MapList = ({navigation}) => {
   const {
@@ -34,12 +35,15 @@ const MapList = ({navigation}) => {
     });
   };
 
+  const handleLogout = () => {
+    setPolygonCoordinates([]);
+    setHasUser(false);
+  };
+
   return (
     <View style={styles.container}>
       {/* Logout button */}
-      <TouchableOpacity
-        style={styles.logoutBtn}
-        onPress={() => setHasUser(false)}>
+      <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
         <Text style={styles.logoutBtnTxt}>Logout</Text>
       </TouchableOpacity>
 
@@ -54,7 +58,9 @@ const MapList = ({navigation}) => {
             style={styles.itemContainer}>
             <View>
               <Text style={styles.title}>{item?.title}</Text>
-              <Text style={styles.area}>400 SF</Text>
+              <Text style={styles.area}>
+                {calculatePolygonArea(item.coordinates)}
+              </Text>
             </View>
 
             <TouchableOpacity onPress={() => handleDelete(item.id)}>
