@@ -28,7 +28,7 @@ const AppMapView = ({navigation}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
-  const initialRegion = {
+  const INITIAL_REGION = {
     latitude: 33.6844,
     longitude: 73.0479,
     latitudeDelta: 0.0922,
@@ -87,7 +87,7 @@ const AppMapView = ({navigation}) => {
       <MapView
         style={{flex: 1}}
         onPress={handleMapPress}
-        initialRegion={initialRegion}>
+        initialRegion={INITIAL_REGION}>
         {coordinates.length >= 2 && (
           <Polygon
             coordinates={coordinates}
@@ -108,6 +108,7 @@ const AppMapView = ({navigation}) => {
           <Button title="Clear" onPress={() => setCoordinates([])} />
         </View>
       )}
+
       <View style={styles.listIconContainer}>
         <TouchableOpacity onPress={handleNavigation}>
           <Icon name="list-ul" size={30} color="black" />
