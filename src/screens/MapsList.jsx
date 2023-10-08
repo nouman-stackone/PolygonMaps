@@ -4,11 +4,17 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {AppContext} from '../context/AppContext';
 
 const MapsList = ({navigation}) => {
-  const {setCreatorMode, polygonCoordinates} = useContext(AppContext);
+  const {setCreatorMode, polygonCoordinates, setPolygonCoordinates} =
+    useContext(AppContext);
 
   const handleCreate = () => {
     setCreatorMode(true);
     navigation.navigate('Home');
+  };
+
+  const handleDelete = id => {
+    const newArray = polygonCoordinates.filter(item => item.id !== id);
+    setPolygonCoordinates(newArray);
   };
 
   const showDetails = map => {
@@ -34,7 +40,7 @@ const MapsList = ({navigation}) => {
               <Text style={styles.area}>400 SF</Text>
             </View>
 
-            <TouchableOpacity onPress={() => console.log('delete')}>
+            <TouchableOpacity onPress={() => handleDelete(item.id)}>
               <Icon name="delete" size={26} color="maroon" />
             </TouchableOpacity>
           </TouchableOpacity>

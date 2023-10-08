@@ -28,14 +28,6 @@ const AppMapView = ({route, navigation}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
-  // useEffect(() => {
-  //   console.log('hello', route.params);
-  //   if (route?.params?.polygonCords) {
-  //     setCoordinates(route.params.polygonCords);
-  //     console.log('hello: ', route.params.polygonCords);
-  //   }
-  // }, [route.params]);
-
   const INITIAL_REGION = {
     latitude: 33.6844,
     longitude: 73.0479,
@@ -83,6 +75,7 @@ const AppMapView = ({route, navigation}) => {
     setIsModalVisible(false);
     setCoordinates([]);
     setInputValue('');
+    setCreatorMode(false);
     navigation.navigate('MapList');
   };
 
@@ -101,6 +94,7 @@ const AppMapView = ({route, navigation}) => {
             coordinates={coordinates}
             fillColor="rgba(0, 200, 0, 0.5)"
             strokeColor="rgba(0, 0, 0, 0.5)"
+            strokeWidth={2}
           />
         )}
       </MapView>
@@ -108,7 +102,7 @@ const AppMapView = ({route, navigation}) => {
       {creatorMode && (
         <View style={styles.btnGroup}>
           <Button
-            title="Create"
+            title="Finish"
             onPress={() => {
               if (coordinates.length > 2) setIsModalVisible(true);
             }}
